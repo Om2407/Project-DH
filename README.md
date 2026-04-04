@@ -1,4 +1,5 @@
 # 🏌️ GolfGives — Golf Charity Subscription Platform
+<img width="1920" height="847" alt="gg1" src="https://github.com/user-attachments/assets/ee9bdd45-e027-4227-9b79-d52890ed218c" />
 
 > A modern subscription-based golf platform combining performance tracking, monthly prize draws, and charitable giving. Built for the Digital Heroes Full-Stack Trainee Selection Process.
 
@@ -8,7 +9,7 @@
 
 <br/>
 
-![GolfGives Hero](./screenshots/gg1.png)
+
 
 ---
 
