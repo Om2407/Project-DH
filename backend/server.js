@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
 
@@ -8,23 +7,17 @@ dotenv.config();
 
 const app = express();
 
-// Handle OPTIONS preflight requests
-app.options('*', (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.sendStatus(200);
-});
-
-// Middleware
+// CORS — manually set on every request
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
   next();
 });
 
-app.use(cors({ origin: '*', credentials: false }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -45,7 +38,7 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Golf Charity Platform API Running' });
 });
 
-// MongoDB connection — cached for Vercel serverless
+// MongoDB connection
 let isConnected = false;
 
 const connectDB = async () => {
@@ -55,7 +48,6 @@ const connectDB = async () => {
   console.log('✅ MongoDB Connected');
 };
 
-// Connect DB on every request (Vercel serverless)
 app.use(async (req, res, next) => {
   try {
     await connectDB();
@@ -65,7 +57,6 @@ app.use(async (req, res, next) => {
   }
 });
 
-// Local development only
 if (process.env.NODE_ENV !== 'production') {
   connectDB().then(() => {
     app.listen(process.env.PORT || 5000, () => {
