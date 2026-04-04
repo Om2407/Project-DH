@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'https://project-niyvxeu5g-decodechn-1922s-projects.vercel.app/api',
+  baseURL: process.env.REACT_APP_API_URL || 'https://project-1xcrtglyh-decodechn-1922s-projects.vercel.app/api',
   headers: { 'Content-Type': 'application/json' }
 });
 
