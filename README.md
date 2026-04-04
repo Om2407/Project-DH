@@ -24,7 +24,9 @@ GolfGives is a full-stack web application that allows golfers to:
 
 <br/>
 
-![GolfGives Charity Section](./screenshots/gg.png)
+
+<img width="1920" height="868" alt="gg" src="https://github.com/user-attachments/assets/e2435f4c-6c9c-4038-bc94-03b863c7abfb" />
+
 
 ---
 
